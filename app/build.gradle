@@ -69,6 +69,7 @@ android {
         // 开发环境
         develop {
             buildConfigField "String", "BASEAPI_SERVER_URL", MODIFY_BIT_TEST_BASEAPI_SERVER_URL
+            dimension APP_VERSIONAME
         }
 
         productFlavors.all { Flavor ->
