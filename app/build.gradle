@@ -1,7 +1,8 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -10,14 +11,150 @@ android {
         applicationId "com.example.proha.yogurt"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.valueOf(APP_VERSIONCODE)
+        versionName APP_VERSIONAME
+        flavorDimensions APP_VERSIONAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+    signingConfigs {
+        relConfig {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+
+        debugConfig {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWORD
+        }
+    }
+
+
     buildTypes {
+
+        debug {
+//            signingConfig signingConfigs.debugConfig//加入key配置
+            buildConfigField "boolean", "LEO_DEBUG", "true"         //显示Log
+            debuggable true
+            minifyEnabled false   //混淆
+            zipAlignEnabled true     //Zipalign优化
+            shrinkResources false      //移除没用资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'  //混淆配置文件
+            multiDexEnabled true    //分包
+
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.relConfig
+            buildConfigField "boolean", "LEO_DEBUG", "false"  //不显示Log
+            lintOptions {
+                disable 'MissingTranslation'
+            }
+            debuggable false
+            jniDebuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
+            multiDexEnabled true
+        }
+
+    }
+
+
+    productFlavors {
+        // 开发环境
+        develop {
+            buildConfigField "String", "BASEAPI_SERVER_URL", MODIFY_BIT_TEST_BASEAPI_SERVER_URL
+        }
+
+        productFlavors.all { Flavor ->
+            Flavor.manifestPlaceholders = [UM_CHANNEL_VALUE: name]
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def newName
+            def timeNow
+            def outMeDirectory = output.outputFile.parent
+            def is_debug = Boolean.FALSE
+
+            if ("true".equals(IS_JENKINS)) {
+                timeNow = JENKINS_TIME
+                if ('\'\''.equals(timeNow)) {
+                    timeNow = getDate()
+                }
+                outMeDirectory = "${FILEOUTDIR}"
+                newName = 'YJG_v' +
+                        APP_VERSIONAME + '_' + timeNow + '_' + variant.productFlavors[0].name + '_' + variant.buildType.name + '.apk'
+            } else {
+                timeNow = getDate()
+                if (variant.buildType.name.equals('debug')) {
+                    is_debug = Boolean.TRUE
+                    newName = "YJG_v${APP_VERSIONAME}_debug.apk"
+                } else {
+                    newName = 'YJG_v' +
+                            APP_VERSIONAME + '_' + timeNow + '_' + variant.productFlavors[0].name + '_' + variant.buildType.name + '.apk'
+                }
+            }
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                outputFileName = newName
+            }
+
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.assemble.doLast { assemble ->
+            //版本号自增
+            // getProVersionCode()
+            //复制mapping文件
+            def mFlavorName = getCurrentFlavor()
+            println(mFlavorName)
+            if ("true".equals(IS_JENKINS)) {
+                println("come in copy mapping")
+                println("${variant.flavorName}")
+                def mappingFileStr = "${buildDir.getPath()}/outputs/mapping/${mFlavorName}/${variant.getBuildType().name}/mapping.txt"
+                println(mappingFileStr)
+                File mapFile = file(mappingFileStr)
+                if (mapFile.exists()) {
+                    println("start copy mapping")
+                    copy {
+                        from "${mappingFile}"
+                        into "${FILEOUTDIR}"
+                        rename { String fileName ->
+                            "mapping-${variant.name}-${JENKINS_TIME}.txt"
+                        }
+                        println("copy mapping success")
+                    }
+                }
+            }
+            //复制APK文件
+            if ("true".equals(IS_JENKINS)) {
+                println("come in copy apk file")
+                println("${variant.flavorName}")
+                def apkFolderStr = "${buildDir.getPath()}/outputs/apk/${mFlavorName}/${variant.getBuildType().name}"
+                println(apkFolderStr)
+                File apkFolder = file(apkFolderStr)
+                if (apkFolder.isDirectory()) {
+                    def apkfiles = apkFolder.listFiles()
+                    for (File apkFile : apkfiles) {
+                        if (apkFile.exists() && apkFile.getName().endsWith('.apk')) {
+                            println("start copy apk file")
+                            copy {
+                                from "${apkFile}"
+                                into "${FILEOUTDIR}"
+                                println("copy apk file success")
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -32,4 +169,39 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+//获得时间
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    List<TaskExecutionRequest> listTsk = gradle.getStartParameter().getTaskRequests()
+    Pattern pattern
+    for (TaskExecutionRequest it : listTsk) {
+        List<String> tskReqList = it.getArgs()
+        for (String tskReqStr : tskReqList) {
+            println tskReqStr
+            if (tskReqStr.contains("assemble")) {
+                println "1"
+                pattern = Pattern.compile("(?i)assemble(\\w+)(release|debug)")
+            } else {
+                println "2"
+                pattern = Pattern.compile("(?i)generate(\\w+)(release|debug)")
+            }
+            Matcher matcher = pattern.matcher(tskReqStr)
+            if (matcher.find())
+                return matcher.group(1)
+            else {
+                println tskReqStr
+                println "NOT FOUND"
+            }
+        }
+    }
+    println "NO MATCH FOUND"
+    return ""
 }

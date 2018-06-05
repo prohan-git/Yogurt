@@ -4,4 +4,5 @@
     <string name="title_dashboard">看板</string>
     <string name="title_notifications">通知</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="action_settings">seting</string>
 </resources>
