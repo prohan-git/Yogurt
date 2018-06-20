@@ -79,6 +79,7 @@ class HomeActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
         val badge = LayoutInflater.from(this)
                 .inflate(R.layout.badge, bottomNavigationMenuView, false)
         findViewById<TextView>(R.id.msg).text = string
+
         itemView.addView(badge)
     }
 
