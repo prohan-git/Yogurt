@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager
 import android.widget.TextView
 import com.example.proha.yogurt.R
 import com.example.proha.yogurt.ui.home.MainFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity(){
