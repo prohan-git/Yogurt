@@ -18,7 +18,7 @@ import android.widget.TextView
 import com.example.proha.yogurt.module.home.MainFragment
 
 
-class HomeActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionListener {
+class HomeActivity : AppCompatActivity(){
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
@@ -64,10 +64,6 @@ class HomeActivity : AppCompatActivity(), MainFragment.OnFragmentInteractionList
 
             }
         })
-    }
-
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     /**
