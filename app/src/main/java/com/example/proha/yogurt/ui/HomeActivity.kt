@@ -18,7 +18,7 @@ import com.example.proha.yogurt.ui.home.MainFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 
-class HomeActivity : AppCompatActivity(){
+class HomeActivity : AppCompatActivity() {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
