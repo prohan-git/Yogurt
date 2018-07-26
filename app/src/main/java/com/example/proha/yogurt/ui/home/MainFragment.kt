@@ -26,7 +26,6 @@ class MainFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-
         val viewModel = ViewModelProviders.of(this).get(MainFragmetViewModle::class.java)
         viewModel.wordOfTheDay.observe(this, Observer { result ->
             if (result != null && result.isNotEmpty()) {

@@ -21,7 +21,8 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-import com.example.android.persistence.model.Comment;
+
+import com.example.proha.yogurt.model.Comment;
 
 import java.util.Date;
 

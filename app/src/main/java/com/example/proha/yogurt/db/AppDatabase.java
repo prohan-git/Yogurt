@@ -27,12 +27,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
-import com.example.android.persistence.AppExecutors;
-import com.example.android.persistence.db.converter.DateConverter;
-import com.example.android.persistence.db.dao.CommentDao;
-import com.example.android.persistence.db.dao.ProductDao;
-import com.example.android.persistence.db.entity.CommentEntity;
-import com.example.android.persistence.db.entity.ProductEntity;
+import com.example.proha.yogurt.AppExecutors;
+import com.example.proha.yogurt.db.converter.DateConverter;
+import com.example.proha.yogurt.db.dao.CommentDao;
+import com.example.proha.yogurt.db.dao.ProductDao;
+import com.example.proha.yogurt.db.entity.CommentEntity;
+import com.example.proha.yogurt.db.entity.ProductEntity;
 
 import java.util.List;
 
@@ -69,7 +69,7 @@ public abstract class AppDatabase extends RoomDatabase {
      * The SQLite database is only created when it's accessed for the first time.
      */
     private static AppDatabase buildDatabase(final Context appContext,
-            final AppExecutors executors) {
+                                             final AppExecutors executors) {
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
                 .addCallback(new Callback() {
                     @Override
@@ -101,12 +101,12 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-    private void setDatabaseCreated(){
+    private void setDatabaseCreated() {
         mIsDatabaseCreated.postValue(true);
     }
 
     private static void insertData(final AppDatabase database, final List<ProductEntity> products,
-            final List<CommentEntity> comments) {
+                                   final List<CommentEntity> comments) {
         database.runInTransaction(() -> {
             database.productDao().insertAll(products);
             database.commentDao().insertAll(comments);

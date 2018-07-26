@@ -9,6 +9,10 @@ import android.arch.lifecycle.MutableLiveData
 class MainFragmetViewModle : ViewModel() {
 
     var wordOfTheDay: LiveData<String> = MutableLiveData<String>()
+
+    init {
+        wordOfTheDay.value.plus("fsd")
+    }
 //
 //    val gardenPlantings = gardenPlantingRepository.getGardenPlantings()
 //

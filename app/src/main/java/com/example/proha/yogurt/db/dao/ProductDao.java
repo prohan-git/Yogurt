@@ -22,18 +22,21 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.example.proha.yogurt.db.entity.CommentEntity;
+import com.example.proha.yogurt.db.entity.ProductEntity;
 
 import java.util.List;
 
 @Dao
-public interface CommentDao {
-    @Query("SELECT * FROM comments where productId = :productId")
-    LiveData<List<CommentEntity>> loadComments(int productId);
-
-    @Query("SELECT * FROM comments where productId = :productId")
-    List<CommentEntity> loadCommentsSync(int productId);
+public interface ProductDao {
+    @Query("SELECT * FROM products")
+    LiveData<List<ProductEntity>> loadAllProducts();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<CommentEntity> comments);
+    void insertAll(List<ProductEntity> products);
+
+    @Query("select * from products where id = :productId")
+    LiveData<ProductEntity> loadProduct(int productId);
+
+    @Query("select * from products where id = :productId")
+    ProductEntity loadProductSync(int productId);
 }
