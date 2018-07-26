@@ -5,6 +5,11 @@ buildscript {
         kotlin_version = '1.2.51'
         lifecycle_versions = '1.1.1'
         room_versions = '1.1.1'
+        work_version = "1.0.0-alpha05"
+
+        gsonVersion = '2.8.2'
+        retrofitLogVersion = "3.9.0"
+        retrofitVersion = "2.3.0"
     }
     repositories {
         google()

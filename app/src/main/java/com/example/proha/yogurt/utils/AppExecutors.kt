@@ -1,11 +1,11 @@
 /*
- * Copyright 2017, The Android Open Source Project
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.model;
+package com.example.proha.yogurt.utils
 
-import java.util.Date;
+import java.util.concurrent.Executors
 
-public interface Comment {
-    int getId();
-    int getProductId();
-    String getText();
-    Date getPostedAt();
+private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
+
+/**
+ * Utility method to run blocks on a dedicated background thread, used for io/database work.
+ */
+fun runOnIoThread(f: () -> Unit) {
+    IO_EXECUTOR.execute(f)
 }

@@ -28,7 +28,7 @@ import java.util.Date;
 
 @Entity(tableName = "comments",
         foreignKeys = {
-                @ForeignKey(entity = ProductEntity.class,
+                @ForeignKey(entity = CommentEntity.class,
                         parentColumns = "id",
                         childColumns = "productId",
                         onDelete = ForeignKey.CASCADE)},
@@ -50,14 +50,6 @@ public class CommentEntity implements Comment {
         this.id = id;
     }
 
-    @Override
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
 
     @Override
     public String getText() {

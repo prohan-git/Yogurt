@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.model;
+package com.example.proha.yogurt.model
 
-public interface Product {
-    int getId();
-    String getName();
-    String getDescription();
-    int getPrice();
+import java.util.Date
+
+interface Comment {
+    val id: Int
+
+    val text: String
+
+    val postedAt: Date
 }

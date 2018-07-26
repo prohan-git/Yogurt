@@ -183,8 +183,21 @@ dependencies {
     implementation "android.arch.lifecycle:runtime:$lifecycle_versions"
     implementation "android.arch.lifecycle:extensions:$lifecycle_versions"
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_versions"
+
     implementation "android.arch.persistence.room:runtime:$room_versions"
     annotationProcessor "android.arch.persistence.room:compiler:$room_versions"
+
+    implementation "android.arch.work:work-runtime:$work_version" // use -ktx for Kotlin
+    implementation "android.arch.work:work-firebase:$work_version"
+    // optional - Firebase JobDispatcher support
+
+
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$retrofitLogVersion"
+
 }
 
 //获得时间

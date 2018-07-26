@@ -24,6 +24,8 @@ import android.arch.persistence.room.Query;
 
 import com.example.proha.yogurt.db.entity.CommentEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 @Dao
@@ -36,4 +38,15 @@ public interface CommentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<CommentEntity> comments);
+
+    @NotNull
+    Object getGardenPlantings();
+
+    @NotNull
+    Object getPlantAndGardenPlantings();
+
+    @NotNull
+    Object getGardenPlantingForPlant(@NotNull String plantId);
+
+    void insertGardenPlanting(@NotNull Object gardenPlanting);
 }
