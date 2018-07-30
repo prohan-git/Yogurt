@@ -19,10 +19,10 @@ package com.example.proha.yogurt.db
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.annotation.MainThread
-import androidx.work.impl.constraints.NetworkState
 import com.android.example.paging.pagingwithnetwork.reddit.api.RedditApi
 import com.example.proha.yogurt.db.dao.CommentDao
 import com.example.proha.yogurt.db.entity.CommentEntity
+import com.example.proha.yogurt.net.NetworkState
 import com.example.proha.yogurt.utils.runOnIoThread
 import retrofit2.Call
 import retrofit2.Callback
@@ -83,10 +83,10 @@ class CommonRepository private constructor(
                             call: Call<RedditApi.ListingResponse>,
                             response: Response<RedditApi.ListingResponse>) {
                         runOnIoThread {
-                            db.runInTransaction {
-                                db.posts().deleteBySubreddit(subredditName)
-                                insertResultIntoDb(subredditName, response.body())
-                            }
+//                            db.runInTransaction {
+//                                db.posts().deleteBySubreddit(subredditName)
+//                                insertResultIntoDb(subredditName, response.body())
+//                            }
                             // since we are in bg thread now, post the result.
                             networkState.postValue(NetworkState.LOADED)
                         }
