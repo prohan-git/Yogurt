@@ -1,4 +1,4 @@
-package com.example.proha.yogurt.viewmodel;
+package com.example.prohan.yogurt.viewmodel;
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel

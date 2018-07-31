@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.db.entity;
+package com.example.prohan.yogurt.db.entity;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
@@ -22,7 +22,7 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 
-import com.example.proha.yogurt.model.Comment;
+import com.example.prohan.yogurt.net.api.model.Comment;
 
 import java.util.Date;
 

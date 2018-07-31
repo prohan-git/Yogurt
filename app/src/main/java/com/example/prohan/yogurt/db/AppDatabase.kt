@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.db
+package com.example.prohan.yogurt.db
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -27,9 +27,9 @@ import android.content.Context
 import android.support.annotation.VisibleForTesting
 import androidx.work.WorkManager
 
-import com.example.proha.yogurt.db.converter.DateConverter
-import com.example.proha.yogurt.db.dao.CommentDao
-import com.example.proha.yogurt.db.entity.CommentEntity
+import com.example.prohan.yogurt.db.converter.DateConverter
+import com.example.prohan.yogurt.db.dao.CommentDao
+import com.example.prohan.yogurt.db.entity.CommentEntity
 
 @Database(entities = [(CommentEntity::class)], version = 1)
 abstract class AppDatabase : RoomDatabase() {

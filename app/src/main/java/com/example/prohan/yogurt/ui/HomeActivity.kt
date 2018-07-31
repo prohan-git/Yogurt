@@ -1,4 +1,4 @@
-package com.example.proha.yogurt.ui
+package com.example.prohan.yogurt.ui
 
 import android.support.v7.app.AppCompatActivity
 
@@ -13,8 +13,8 @@ import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.v4.view.ViewPager
 import android.widget.TextView
-import com.example.proha.yogurt.R
-import com.example.proha.yogurt.ui.home.MainFragment
+import com.example.prohan.yogurt.R
+import com.example.prohan.yogurt.ui.home.MainFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
 

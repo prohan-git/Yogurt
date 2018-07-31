@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt;
+package com.example.prohan.yogurt.net
 
-import android.app.Application;
+enum class Status {
+    RUNNING,
+    SUCCESS,
+    FAILED
+}
 
-import com.example.proha.yogurt.db.AppDatabase;
-
-/**
- * Android Application class. Used for accessing singletons.
- */
-public class BasicApp extends Application {
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
-
-    public AppDatabase getDatabase() {
-        return AppDatabase.Companion.getInstance(this);
+@Suppress("DataClassPrivateConstructor")
+data class NetworkState private constructor(
+        val status: Status,
+        val msg: String? = null) {
+    companion object {
+        val LOADED = NetworkState(Status.SUCCESS)
+        val LOADING = NetworkState(Status.RUNNING)
+        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
     }
 }

@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.db
+package com.example.prohan.yogurt.db
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.support.annotation.MainThread
 import com.android.example.paging.pagingwithnetwork.reddit.api.RedditApi
-import com.example.proha.yogurt.db.dao.CommentDao
-import com.example.proha.yogurt.db.entity.CommentEntity
-import com.example.proha.yogurt.net.NetworkState
-import com.example.proha.yogurt.utils.runOnIoThread
+import com.example.prohan.yogurt.db.dao.CommentDao
+import com.example.prohan.yogurt.db.entity.CommentEntity
+import com.example.prohan.yogurt.net.NetworkState
+import com.example.prohan.yogurt.utils.runOnIoThread
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

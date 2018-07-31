@@ -1,4 +1,4 @@
-package com.example.proha.yogurt.ui.home
+package com.example.prohan.yogurt.ui.home
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.proha.yogurt.R
-import com.example.proha.yogurt.viewmodel.MainFragmetViewModle
+import com.example.prohan.yogurt.R
+import com.example.prohan.yogurt.viewmodel.MainFragmetViewModle
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {

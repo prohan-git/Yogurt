@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.proha.yogurt"
+        applicationId "com.example.prohan.yogurt"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode Integer.valueOf(APP_VERSIONCODE)
@@ -71,6 +71,32 @@ android {
             buildConfigField "String", "BASEAPI_SERVER_URL", MODIFY_BIT_TEST_BASEAPI_SERVER_URL
             dimension APP_VERSIONAME
         }
+
+        finalProduction {
+            dimension APP_VERSIONAME
+            applicationId "me.fleka.modernandroidapp"
+//            resValue "string", "app_name", "Modern App"
+        }
+
+        demoProduction {
+            dimension APP_VERSIONAME
+            applicationId "com.example.prohan.yogurt.demoproduction"
+//            resValue "string", "app_name", "Modern App Demo P"
+        }
+
+        demoTesting {
+            dimension APP_VERSIONAME
+            applicationId "com.example.prohan.yogurt.demotesting"
+//            resValue "string", "app_name", "Modern App Demo T"
+        }
+
+
+        mock {
+            dimension APP_VERSIONAME
+            applicationId "com.example.prohan.yogurt.mock"
+//            resValue "string", "app_name", "Modern App Mock"
+        }
+
 
         productFlavors.all { Flavor ->
             Flavor.manifestPlaceholders = [UM_CHANNEL_VALUE: name]

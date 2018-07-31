@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright 2017, The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.net
+package com.example.prohan.yogurt.db.converter;
 
-enum class Status {
-    RUNNING,
-    SUCCESS,
-    FAILED
-}
+import android.arch.persistence.room.TypeConverter;
 
-@Suppress("DataClassPrivateConstructor")
-data class NetworkState private constructor(
-        val status: Status,
-        val msg: String? = null) {
-    companion object {
-        val LOADED = NetworkState(Status.SUCCESS)
-        val LOADING = NetworkState(Status.RUNNING)
-        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
+import java.util.Date;
+
+public class DateConverter {
+    @TypeConverter
+    public static Date toDate(Long timestamp) {
+        return timestamp == null ? null : new Date(timestamp);
+    }
+
+    @TypeConverter
+    public static Long toTimestamp(Date date) {
+        return date == null ? null : date.getTime();
     }
 }

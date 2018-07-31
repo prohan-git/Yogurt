@@ -14,14 +14,25 @@
  * limitations under the License.
  */
 
-package com.example.proha.yogurt.model
+package com.example.prohan.yogurt;
 
-import java.util.Date
+import android.app.Application;
 
-interface Comment {
-    val id: Int
+import com.example.prohan.yogurt.db.AppDatabase;
 
-    val text: String
+/**
+ * Android Application class. Used for accessing singletons.
+ */
+public class BasicApp extends Application {
 
-    val postedAt: Date
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
+
+    public AppDatabase getDatabase() {
+        return AppDatabase.Companion.getInstance(this);
+    }
 }
