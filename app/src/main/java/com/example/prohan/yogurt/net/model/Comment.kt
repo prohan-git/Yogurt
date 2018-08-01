@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.prohan.yogurt.net.api.model
+package com.example.prohan.yogurt.net.model
 
 import java.util.Date
 

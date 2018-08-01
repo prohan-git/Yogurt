@@ -22,7 +22,7 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 
-import com.example.prohan.yogurt.net.api.model.Comment;
+import com.example.prohan.yogurt.net.model.Comment;
 
 import java.util.Date;
 
