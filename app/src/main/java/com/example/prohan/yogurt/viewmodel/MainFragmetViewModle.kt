@@ -6,13 +6,8 @@ import android.arch.lifecycle.MutableLiveData
 
 
 class MainFragmetViewModle : ViewModel() {
+
     var wordOfTheDay: LiveData<String> = MutableLiveData<String>()
-
-
-//    val plantAndGardenPlantings: LiveData<List<CommonRepository>> =
-//            Transformations.map(ommonRepository.getPlantAndGardenPlantings()) {
-//                it.filter { it.gardenPlantings.isNotEmpty() }
-//            }
 }
 
 

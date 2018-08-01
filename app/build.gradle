@@ -74,7 +74,7 @@ android {
 
         finalProduction {
             dimension APP_VERSIONAME
-            applicationId "me.fleka.modernandroidapp"
+            applicationId "com.example.prohan.yogurt"
 //            resValue "string", "app_name", "Modern App"
         }
 
