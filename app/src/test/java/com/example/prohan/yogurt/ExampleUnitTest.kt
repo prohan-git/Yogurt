@@ -1,4 +1,4 @@
-package com.example.proha.yogurt
+package com.example.prohan.yogurt
 
 import org.junit.Test
 
